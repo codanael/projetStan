@@ -1,8 +1,8 @@
 package web;
 
-import java.util.Date;
-
 import javax.ejb.EJB;
+import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebService;
 
 import metier.UtilisateurLocal;
@@ -16,8 +16,9 @@ public class WebServiceUtilisateurStan {
 	
 	private UtilisateurLocal metier;
 	
-	public Utilisateur addUtilisateur(String nom, String prenom, Date dateDeNaissance) {
-		return metier.addUtilisateur(nom, prenom, dateDeNaissance);
+	@WebMethod(operationName="ajouter")
+	public Utilisateur addUtilisateur(@WebParam(name="nom")String nom, @WebParam(name="prenom")String prenom, @WebParam(name="annee")int annee, @WebParam(name="mois")int mois, @WebParam(name="jour")int jour) {
+		return metier.addUtilisateur(nom, prenom, annee, mois, jour);
 	}
 	
 	public Utilisateur getUtilisateur(int id) {

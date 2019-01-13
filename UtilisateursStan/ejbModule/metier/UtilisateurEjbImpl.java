@@ -1,11 +1,11 @@
 package metier;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceUnit;
+import javax.persistence.PersistenceContext;
 
 import metier.entities.Utilisateur;
 
@@ -13,12 +13,13 @@ import metier.entities.Utilisateur;
 @Stateless
 public class UtilisateurEjbImpl implements UtilisateurRemote, UtilisateurLocal{
 
-	@PersistenceUnit(unitName="UtilisateursStan")
+	@PersistenceContext(unitName="UtilisateursStan")
 	private EntityManager em;
 	
 	@Override
-	public Utilisateur addUtilisateur(String nom, String prenom, Date dateDeNaissance) {
-		Utilisateur u = new Utilisateur(nom,prenom,dateDeNaissance);
+	public Utilisateur addUtilisateur(String nom, String prenom, int annee, int mois, int jour) {
+		LocalDate date = LocalDate.of(annee, mois, jour);
+		Utilisateur u = new Utilisateur(nom,prenom, date);
 		em.persist(u);
 		return u;
 	}

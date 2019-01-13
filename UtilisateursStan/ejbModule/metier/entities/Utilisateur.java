@@ -2,7 +2,7 @@ package metier.entities;
 
 import java.io.Serializable;
 import java.lang.String;
-import java.util.Date;
+import java.time.LocalDate;
 import javax.persistence.*;
 
 /**
@@ -15,17 +15,18 @@ public class Utilisateur implements Serializable {
 
 	   
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String nom;
 	private String prenom;
-	private int age;
-	private Date dateDeNaissance;
+	private LocalDate dateDeNaissance;
 	private static final long serialVersionUID = 1L;
 
 	public Utilisateur() {
 		super();
 	}   
-	public Utilisateur(String nom, String prenom, Date dateDeNaissance) {
+	public Utilisateur(String nom, String prenom, LocalDate dateDeNaissance) {
+		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.dateDeNaissance = dateDeNaissance;
@@ -51,18 +52,12 @@ public class Utilisateur implements Serializable {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}   
-	public int getAge() {
-		return this.age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-	}   
-	public Date getDateDeNaissance() {
+   
+	public LocalDate getDateDeNaissance() {
 		return this.dateDeNaissance;
 	}
 
-	public void setDateDeNaissance(Date dateDeNaissance) {
+	public void setDateDeNaissance(LocalDate dateDeNaissance) {
 		this.dateDeNaissance = dateDeNaissance;
 	}
    

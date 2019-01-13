@@ -5,6 +5,7 @@
 	<projects>
 		<project>UtilisateursStan</project>
 		<project>UtilisateursStanClient</project>
+		<project>CoucheWebUtilisateurStan</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

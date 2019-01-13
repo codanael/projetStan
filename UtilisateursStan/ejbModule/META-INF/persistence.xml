@@ -3,8 +3,5 @@
 	<persistence-unit name="UtilisateursStan">
 		<jta-data-source>java:/utilisateurs_stan</jta-data-source>
 		<class>metier.entities.Utilisateur</class>
-		<properties>
-			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-		</properties>
 	</persistence-unit>
 </persistence>
