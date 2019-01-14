@@ -6,6 +6,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import metier.entities.Utilisateur;
 
@@ -23,6 +24,13 @@ public class UtilisateurEjbImpl implements UtilisateurRemote, UtilisateurLocal{
 		em.persist(u);
 		return u;
 	}
+	
+	@Override
+	public Utilisateur addUtilisateur(String nom, String prenom, LocalDate dateDeNaissance) {
+		Utilisateur u = new Utilisateur(nom,prenom, dateDeNaissance);
+		em.persist(u);
+		return u;
+	}
 
 	@Override
 	public Utilisateur getUtilisateur(int id) {
@@ -31,10 +39,13 @@ public class UtilisateurEjbImpl implements UtilisateurRemote, UtilisateurLocal{
 		return u;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Utilisateur> listUtilisateur() {
-		// TODO Auto-generated method stub
-		return null;
+		Query req = em.createQuery("select u from Utilisateur u");
+		return req.getResultList();
 	}
+
+	
 
 }
