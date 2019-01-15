@@ -29,7 +29,9 @@ $AjouterParam= array(
     "dateDeNaissance" => $dateDeNaissance
 );
 
-if($id>0) $AfficherRes=$clientSOAP->__soapCall("getUtilisateur", array($AfficherParam));
+if($id>0){ 
+    $AfficherRes=$clientSOAP->__soapCall("getUtilisateur", array($AfficherParam));
+}
 
  ?>
 <html>
@@ -41,7 +43,9 @@ if($id>0) $AfficherRes=$clientSOAP->__soapCall("getUtilisateur", array($Afficher
 
 
 <?php 
- if(isset($_GET["arg0"]) && isset($AfficherRes)) echo $AfficherRes->return->nom ; echo " ". $AfficherRes->return->prenom ;
+ if(isset($_GET["arg0"]) && isset($AfficherRes)){
+      echo $AfficherRes->return->nom ; echo " ". $AfficherRes->return->prenom ;
+ }
  ?>
 
 <form action="service.php" method="get">
@@ -53,7 +57,9 @@ if($id>0) $AfficherRes=$clientSOAP->__soapCall("getUtilisateur", array($Afficher
 
 
 <?php 
-if(isset($_GET["nom"]) && isset($_GET["prenom"]) && isset($_GET["dateDeNaissance"])) $AjouterRes=$clientSOAP->__soapCall("ajouterDate", array($AjouterParam));
+if(isset($_GET["nom"]) && isset($_GET["prenom"]) && isset($_GET["dateDeNaissance"])){ 
+    $AjouterRes=$clientSOAP->__soapCall("ajouterDate", array($AjouterParam));
+}
  ?>
 
 <body>
@@ -62,7 +68,9 @@ if(isset($_GET["nom"]) && isset($_GET["prenom"]) && isset($_GET["dateDeNaissance
  <button> Table</button>
  </form>
  <?php
-if(isset($_GET["table"]))$AfficherTableRes=$clientSOAP->__soapCall("afficherListeUtilisateur",array($AfficherTableParam));
+if(isset($_GET["table"])){
+    $AfficherTableRes=$clientSOAP->__soapCall("afficherListeUtilisateur",array($AfficherTableParam));
+}
 if(isset($AfficherTableRes)){
     foreach($AfficherTableRes->return as $res){
         echo $res->nom." ".$res->prenom. "<br>";
