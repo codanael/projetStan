@@ -2,6 +2,7 @@ package metier.entities;
 
 import java.io.Serializable;
 import java.lang.String;
+
 import javax.persistence.*;
 
 /**
@@ -15,10 +16,14 @@ public class Bus implements Serializable {
 	   
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="bus_id")
 	private int id;
 	private String type;
 	private int nbrDeKilometre;
 	private int capacite;
+	@OneToOne(fetch =FetchType.LAZY)
+	@JoinColumn(name="horraires_id")
+	private Horraires horraires;
 	private static final long serialVersionUID = 1L;
 
 	public Bus() {
@@ -57,5 +62,17 @@ public class Bus implements Serializable {
 	public void setCapacite(int capacite) {
 		this.capacite = capacite;
 	}
-   
+	
+	
+	
+	/*@ManyToMany
+	//(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
+	@JoinTable(name = "bus_horraires",
+	joinColumns = {@JoinColumn(name="bus_id", referencedColumnName="ID")},
+	inverseJoinColumns = {@JoinColumn(name="horraires_id", referencedColumnName="ID")})
+	
+	public Set<Horraires> getHorraires() {
+		return horraires;
+	}*/
+	
 }
