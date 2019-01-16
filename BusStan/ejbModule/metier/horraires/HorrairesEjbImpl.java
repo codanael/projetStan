@@ -1,4 +1,4 @@
-package metier;
+package metier.horraires;
 
 import java.sql.Time;
 import java.util.List;

@@ -1,4 +1,4 @@
-package metier;
+package metier.bus;
 
 import java.util.List;
 

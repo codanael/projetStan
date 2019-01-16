@@ -8,8 +8,8 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
-import metier.HorrairesLocal;
 import metier.entities.Horraires;
+import metier.horraires.HorrairesLocal;
 
 @WebService(targetNamespace = "http://stanutilisateur.me")
 public class WebServiceHorrairesStan {

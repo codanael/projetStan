@@ -7,7 +7,7 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
-import metier.BusLocal;
+import metier.bus.BusLocal;
 import metier.entities.Bus;
 
 @WebService(targetNamespace = "http://stanutilisateur.me")
