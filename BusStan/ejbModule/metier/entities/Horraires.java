@@ -2,6 +2,8 @@ package metier.entities;
 
 import java.io.Serializable;
 import java.sql.Time;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -16,13 +18,12 @@ public class Horraires implements Serializable {
 	   
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="horraires_id")
 	private int id;
 	private Time heureDeDebut;
 	private int frequence;
 	private Time heureDeFin;
-	@OneToOne(mappedBy = "horraires", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
-	private Bus bus;
+	@ManyToMany(mappedBy = "horraires")
+	private Set<Arrets> arrets = new HashSet<>();
 	private static final long serialVersionUID = 1L;
 	
 	
@@ -61,11 +62,11 @@ public class Horraires implements Serializable {
 	public void setHeureDeFin(Time heureDeFin) {
 		this.heureDeFin = heureDeFin;
 	}
-	public Bus getBus() {
-		return bus;
+	public Set<Arrets> getArrets() {
+		return arrets;
 	}
-	public void setBus(Bus bus) {
-		this.bus = bus;
+	public void setArrets(Set<Arrets> arrets) {
+		this.arrets = arrets;
 	}
 	
 	

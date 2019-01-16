@@ -4,6 +4,8 @@
 		<jta-data-source>java:/bus_stan</jta-data-source>
 		<class>metier.entities.Bus</class>
 		<class>metier.entities.Horraires</class>
+		<class>metier.entities.Arrets</class>
+		<class>metier.entities.LigneBus</class>
 		<properties>
 			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
 		</properties>

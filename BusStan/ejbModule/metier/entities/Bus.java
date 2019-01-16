@@ -16,13 +16,11 @@ public class Bus implements Serializable {
 	   
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="bus_id")
 	private int id;
 	private String type;
 	private int nbrDeKilometre;
 	private int capacite;
-	@OneToOne(fetch =FetchType.LAZY)
-	@JoinColumn(name="horraires_id")
+	@OneToOne(fetch =FetchType.LAZY) @MapsId
 	private Horraires horraires;
 	private static final long serialVersionUID = 1L;
 
