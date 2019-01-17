@@ -30,4 +30,11 @@ public class HorrairesEjbImpl implements HorrairesLocal, HorrairesRemote {
 		return req.getResultList();
 	}
 
+	@Override
+	public Horraires getHorraire(int id) {
+		Horraires h = em.find(Horraires.class, id);
+		if(h == null) throw new RuntimeException("Cet horraire n'existe pas");
+		return h;
+	}
+
 }

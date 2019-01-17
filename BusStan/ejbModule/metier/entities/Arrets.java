@@ -22,12 +22,13 @@ public class Arrets implements Serializable {
 	private String nom;
 	@ManyToMany(mappedBy = "arrets")
 	private Set<LigneBus> ligneBus = new HashSet<>();
-	@ManyToMany(cascade = {
-			CascadeType.PERSIST, 
-			CascadeType.MERGE},
+	@ManyToMany(
+			cascade = {
+					CascadeType.PERSIST, 
+					CascadeType.MERGE},
 			fetch = FetchType.EAGER
 			
-		)
+			)
 	@JoinTable(name= "arretsHorraires",
 			joinColumns = @JoinColumn(name = "arrets_id"),
 			inverseJoinColumns = @JoinColumn(name = "horraires_id")

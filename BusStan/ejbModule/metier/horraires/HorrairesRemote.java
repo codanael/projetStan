@@ -10,6 +10,7 @@ import metier.entities.Horraires;
 @Remote
 public interface HorrairesRemote {
 	public Horraires addHorraire(Time heureDeDebut, int frequence, Time heureDeFin);
+	public Horraires getHorraire(int id);
 	public List<Horraires> getListHorraires();
 
 }

@@ -33,6 +33,9 @@ public class LigneBus implements Serializable {
 	public LigneBus() {
 		super();
 	}   
+	public LigneBus(int numero) {
+		this.numero = numero;
+	}
 	public int getId() {
 		return this.id;
 	}
@@ -50,8 +53,8 @@ public class LigneBus implements Serializable {
 	public Set<Arrets> getArrets() {
 		return arrets;
 	}
-	public void setArrets(Set<Arrets> arrets) {
-		this.arrets = arrets;
+	public void addArret(Arrets arret) {
+		this.arrets.add(arret);
 	}
 	
    
