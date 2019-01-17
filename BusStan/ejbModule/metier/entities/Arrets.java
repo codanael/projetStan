@@ -24,8 +24,10 @@ public class Arrets implements Serializable {
 	private Set<LigneBus> ligneBus = new HashSet<>();
 	@ManyToMany(cascade = {
 			CascadeType.PERSIST, 
-			CascadeType.MERGE
-		})
+			CascadeType.MERGE},
+			fetch = FetchType.EAGER
+			
+		)
 	@JoinTable(name= "arretsHorraires",
 			joinColumns = @JoinColumn(name = "arrets_id"),
 			inverseJoinColumns = @JoinColumn(name = "horraires_id")
@@ -36,6 +38,10 @@ public class Arrets implements Serializable {
 	public Arrets() {
 		super();
 	}   
+	public Arrets(String nom) {
+		this.nom=nom;
+		horraires = new HashSet<Horraires>();
+	}
 	public int getId() {
 		return this.id;
 	}
@@ -59,8 +65,8 @@ public class Arrets implements Serializable {
 	public Set<Horraires> getHorraires() {
 		return horraires;
 	}
-	public void setHorraires(Set<Horraires> horraires) {
-		this.horraires = horraires;
+	public void addHorraires(Horraires horraires) {
+		this.horraires.add(horraires);
 	}
 	
    

@@ -18,8 +18,8 @@ public class WebServiceHorrairesStan {
 	private HorrairesLocal metier;
 	
 	@WebMethod(operationName="ajouterHorraire")
-	public Horraires addHorraire(@WebParam(name="heureDeDebut")Time heureDeDebut, @WebParam(name="frequence") int frequence, @WebParam(name="heureDeFin")Time heureDeFin) {
-		return metier.addHorraire(heureDeDebut, frequence, heureDeFin);
+	public Horraires addHorraire(@WebParam(name="heureDeDebut")String heureDeDebutS, @WebParam(name="frequence") int frequence, @WebParam(name="heureDeFin")String heureDeFinS) {
+		return metier.addHorraire(Time.valueOf(heureDeDebutS), frequence, Time.valueOf(heureDeFinS));
 	}
 	
 	@WebMethod(operationName="afficherListeHorraires")
