@@ -2,12 +2,14 @@ package metier.horraires;
 
 import java.sql.Time;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import metier.entities.Arrets;
 import metier.entities.Horraires;
 
 @Stateless
@@ -35,6 +37,12 @@ public class HorrairesEjbImpl implements HorrairesLocal, HorrairesRemote {
 		Horraires h = em.find(Horraires.class, id);
 		if(h == null) throw new RuntimeException("Cet horraire n'existe pas");
 		return h;
+	}
+
+	@Override
+	public Set<Horraires> getHorrairesArret(int idArret) {
+		Arrets a = em.find(Arrets.class, idArret);
+		return a.getHorraires();
 	}
 
 }

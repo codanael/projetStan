@@ -2,6 +2,7 @@ package web;
 
 import java.sql.Time;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.jws.WebMethod;
@@ -51,6 +52,11 @@ public class WebServiceStan {
 	@WebMethod(operationName="ajouterHorraireAArret")
 	public Arrets addHorraireArret(@WebParam(name="idArret")int idArret,@WebParam(name="idHorraire") int idHorraire) {
 		return metierArrets.addHorrairesToArrets(idArret, idHorraire);
+	}
+	
+	@WebMethod(operationName="afficherHorrairesArret")
+	public Set<Horraires> getHorrairesArret(@WebParam(name="idArret")int idArret){
+		return metierHorraires.getHorrairesArret(idArret);
 	}
 
 	//**SERVICES LIGNES**//
