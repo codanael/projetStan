@@ -29,7 +29,8 @@ public class WebServiceStan {
 
 	@EJB
 	private BusLocal metierBus;
-
+	
+	@EJB
 	private LignesLocal metierLignes;
 
 	//**SERVICES ARRETS**//
