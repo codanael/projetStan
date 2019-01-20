@@ -2,8 +2,6 @@ package metier.entities;
 
 import java.io.Serializable;
 import java.sql.Time;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.*;
 
@@ -22,17 +20,21 @@ public class Horraires implements Serializable {
 	private Time heureDeDebut;
 	private int frequence;
 	private Time heureDeFin;
-	@ManyToMany(mappedBy = "horraires")
-	private Set<Arrets> arrets = new HashSet<>();
+	@OneToOne
+	private Arrets Arret;
+	@OneToOne
+	private LigneBus Ligne;
 	private static final long serialVersionUID = 1L;
 	
 	
 
-	public Horraires(Time heureDeDebut, int frequence, Time heureDeFin) {
+	public Horraires(Time heureDeDebut, int frequence, Time heureDeFin, Arrets arret, LigneBus ligne) {
 		super();
 		this.heureDeDebut = heureDeDebut;
 		this.frequence = frequence;
 		this.heureDeFin = heureDeFin;
+		this.Arret = arret;
+		this.Ligne = ligne;
 	}
 	public Horraires() {
 		super();
@@ -62,12 +64,19 @@ public class Horraires implements Serializable {
 	public void setHeureDeFin(Time heureDeFin) {
 		this.heureDeFin = heureDeFin;
 	}
-	public Set<Arrets> getArrets() {
-		return arrets;
+	public Arrets getArret() {
+		return Arret;
 	}
-	public void setArrets(Set<Arrets> arrets) {
-		this.arrets = arrets;
+	public void setArret(Arrets arret) {
+		Arret = arret;
 	}
+	public LigneBus getLigne() {
+		return Ligne;
+	}
+	public void setLigne(LigneBus ligne) {
+		Ligne = ligne;
+	}
+
 	
 	
    

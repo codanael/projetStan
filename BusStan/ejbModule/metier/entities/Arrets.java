@@ -22,27 +22,17 @@ public class Arrets implements Serializable {
 	private String nom;
 	@ManyToMany(mappedBy = "arrets")
 	private Set<LigneBus> ligneBus = new HashSet<>();
-	@ManyToMany(
-			cascade = {
-					CascadeType.PERSIST, 
-					CascadeType.MERGE},
-			fetch = FetchType.EAGER
-			
-			)
-	@JoinTable(name= "arretsHorraires",
-			joinColumns = @JoinColumn(name = "arrets_id"),
-			inverseJoinColumns = @JoinColumn(name = "horraires_id")
-	)
-	private Set<Horraires> horraires = new HashSet<>();
+	
 	private static final long serialVersionUID = 1L;
 
 	public Arrets() {
 		super();
 	}   
+
 	public Arrets(String nom) {
-		this.nom=nom;
-		horraires = new HashSet<Horraires>();
+		this.nom = nom;
 	}
+
 	public int getId() {
 		return this.id;
 	}
@@ -63,12 +53,8 @@ public class Arrets implements Serializable {
 	public void setLigneBus(Set<LigneBus> ligneBus) {
 		this.ligneBus = ligneBus;
 	}
-	public Set<Horraires> getHorraires() {
-		return horraires;
-	}
-	public void addHorraires(Horraires horraires) {
-		this.horraires.add(horraires);
-	}
+
+
 	
    
 }

@@ -2,7 +2,6 @@ package metier.horraires;
 
 import java.sql.Time;
 import java.util.List;
-import java.util.Set;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -11,6 +10,7 @@ import javax.persistence.Query;
 
 import metier.entities.Arrets;
 import metier.entities.Horraires;
+import metier.entities.LigneBus;
 
 @Stateless
 public class HorrairesEjbImpl implements HorrairesLocal, HorrairesRemote {
@@ -18,12 +18,6 @@ public class HorrairesEjbImpl implements HorrairesLocal, HorrairesRemote {
 	@PersistenceContext(unitName="bus_stan")
 	private EntityManager em;
 
-	@Override
-	public Horraires addHorraire(Time heureDeDebut, int frequence, Time heureDeFin) {
-		Horraires h = new Horraires(heureDeDebut, frequence, heureDeFin);
-		em.persist(h);
-		return h;
-	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -39,10 +33,29 @@ public class HorrairesEjbImpl implements HorrairesLocal, HorrairesRemote {
 		return h;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Set<Horraires> getHorrairesArret(int idArret) {
-		Arrets a = em.find(Arrets.class, idArret);
-		return a.getHorraires();
+	public List<Horraires> getHorrairesArret(int idArret) {
+		Query req = em.createQuery("select h from Horraires h where Arret_id like :arretid").setParameter("arretid", idArret);
+		return req.getResultList();
+	}
+
+	@Override
+	public Horraires addHorraire(Time heureDeDebut, int frequence, Time heureDeFin, int arret, int ligne) {
+		try {
+		Horraires h = new Horraires(heureDeDebut, frequence, heureDeFin, em.find(Arrets.class, arret), em.find(LigneBus.class, ligne));
+		em.persist(h);
+		return h;
+		}
+		catch(RuntimeException e) {
+			return null;
+		}
+	}
+
+	@Override
+	public Horraires getHorraire(int idArret, int idLigne) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -8,7 +8,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import metier.entities.Arrets;
-import metier.entities.Horraires;
 
 @Stateless
 public class ArretsEjbImpl implements ArretsLocal, ArretsRemote {
@@ -37,13 +36,5 @@ public class ArretsEjbImpl implements ArretsLocal, ArretsRemote {
 		return req.getResultList();
 	}
 
-	@Override
-	public Arrets addHorrairesToArrets(int idArret, int idHorraire) {
-		Arrets a = em.find(Arrets.class, idArret);
-		Horraires h = em.find(Horraires.class, idHorraire);
-		a.addHorraires(h);
-		em.persist(a);
-		return a;
-	}
 
 }

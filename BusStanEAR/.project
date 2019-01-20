@@ -4,7 +4,6 @@
 	<comment></comment>
 	<projects>
 		<project>BusStan</project>
-		<project>BusStanClient</project>
 		<project>CoucheWebBusStan</project>
 	</projects>
 	<buildSpec>

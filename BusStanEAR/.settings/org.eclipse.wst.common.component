@@ -5,9 +5,6 @@
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="BusStanClient.jar" deploy-path="/" handle="module:/resource/BusStanClient/BusStanClient">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="CoucheWebBusStan.war" deploy-path="/" handle="module:/resource/CoucheWebBusStan/CoucheWebBusStan">
             <dependent-object/>
             <dependency-type>uses</dependency-type>

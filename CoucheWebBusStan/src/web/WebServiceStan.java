@@ -2,7 +2,6 @@ package web;
 
 import java.sql.Time;
 import java.util.List;
-import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.jws.WebMethod;
@@ -49,14 +48,9 @@ public class WebServiceStan {
 	public List<Arrets> getListArrets() {
 		return metierArrets.getListArrets();
 	}
-
-	@WebMethod(operationName="ajouterHorraireAArret")
-	public Arrets addHorraireArret(@WebParam(name="idArret")int idArret,@WebParam(name="idHorraire") int idHorraire) {
-		return metierArrets.addHorrairesToArrets(idArret, idHorraire);
-	}
 	
 	@WebMethod(operationName="afficherHorrairesArret")
-	public Set<Horraires> getHorrairesArret(@WebParam(name="idArret")int idArret){
+	public List<Horraires> getHorrairesArret(@WebParam(name="idArret")int idArret){
 		return metierHorraires.getHorrairesArret(idArret);
 	}
 
@@ -85,8 +79,8 @@ public class WebServiceStan {
 	//**SERVICES HORRAIRES**//
 
 	@WebMethod(operationName="ajouterHorraire")
-	public Horraires addHorraire(@WebParam(name="heureDeDebut")String heureDeDebutS, @WebParam(name="frequence") int frequence, @WebParam(name="heureDeFin")String heureDeFinS) {
-		return metierHorraires.addHorraire(Time.valueOf(heureDeDebutS), frequence, Time.valueOf(heureDeFinS));
+	public Horraires addHorraire(@WebParam(name="heureDeDebut")String heureDeDebutS, @WebParam(name="frequence") int frequence, @WebParam(name="heureDeFin")String heureDeFinS, @WebParam(name="idArret")int idArret, @WebParam(name="idLigne")int idLigne) {
+		return metierHorraires.addHorraire(Time.valueOf(heureDeDebutS), frequence, Time.valueOf(heureDeFinS), idArret, idLigne);
 	}
 
 	@WebMethod(operationName="afficherListeHorraires")

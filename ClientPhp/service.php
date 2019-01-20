@@ -14,10 +14,10 @@ ini_set("soap.wsdl_cache_enabled", "0"); //Permet de reset le cache du WSDL (Lor
  if(isset($_GET["prenom"]))$prenom = $_GET["prenom"];
  if(isset($_GET["dateDeNaissance"]))$dateDeNaissance = $_GET["dateDeNaissance"];
 
- /*
+ 
  $functions = $clientSOAP->__getFunctions ();
 var_dump ($functions);
-*/
+
  $AfficherParam= array(
     "arg0" => $id
 );
@@ -36,9 +36,11 @@ if($id>0){
  ?>
 <html>
  <body>
+     <div class='container'>
  <form action="service.php" method="get">
  <input type="text" name="arg0" value="id"> 
  <button> Afficher utilisateur</button>
+ 
  </form>
 
 
@@ -77,6 +79,6 @@ if(isset($AfficherTableRes)){
     }
 }
  ?>
-
+</div>
 </body>
 </html>

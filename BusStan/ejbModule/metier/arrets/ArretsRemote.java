@@ -12,5 +12,4 @@ public interface ArretsRemote {
 	public Arrets addArrets(String nom);
 	public Arrets getArrets(int id);
 	public List<Arrets> getListArrets();
-	public Arrets addHorrairesToArrets(int idArret, int idHorraire);
 }
