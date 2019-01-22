@@ -36,5 +36,12 @@ public class ArretsEjbImpl implements ArretsLocal, ArretsRemote {
 		return req.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Arrets> getArretsLigne(int idLigne) {
+		Query req = em.createQuery("select a FROM Arrets a JOIN a.ligneBus l WHERE l.id = :ligneId ").setParameter("ligneId", idLigne);;
+		return req.getResultList();
+	}
+
 
 }

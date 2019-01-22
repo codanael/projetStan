@@ -1,7 +1,8 @@
 package metier.entities;
 
 import java.io.Serializable;
-import java.sql.Time;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.*;
 
@@ -11,15 +12,16 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="horraires")
-public class Horraires implements Serializable {
+public class Horraires implements Serializable, AttributeConverter<String, LocalTime>{
+	
 
 	   
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-	private Time heureDeDebut;
+	private String heureDeDebut;
 	private int frequence;
-	private Time heureDeFin;
+	private String heureDeFin;
 	@OneToOne
 	private Arrets Arret;
 	@OneToOne
@@ -28,7 +30,7 @@ public class Horraires implements Serializable {
 	
 	
 
-	public Horraires(Time heureDeDebut, int frequence, Time heureDeFin, Arrets arret, LigneBus ligne) {
+	public Horraires(String heureDeDebut, int frequence, String heureDeFin, Arrets arret, LigneBus ligne) {
 		super();
 		this.heureDeDebut = heureDeDebut;
 		this.frequence = frequence;
@@ -46,10 +48,10 @@ public class Horraires implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Time getHeureDeDebut() {
+	public String getHeureDeDebut() {
 		return heureDeDebut;
 	}
-	public void setHeureDeDebut(Time heureDeDebut) {
+	public void setHeureDeDebut(String heureDeDebut) {
 		this.heureDeDebut = heureDeDebut;
 	}
 	public int getFrequence() {
@@ -58,10 +60,10 @@ public class Horraires implements Serializable {
 	public void setFrequence(int frequence) {
 		this.frequence = frequence;
 	}
-	public Time getHeureDeFin() {
+	public String getHeureDeFin() {
 		return heureDeFin;
 	}
-	public void setHeureDeFin(Time heureDeFin) {
+	public void setHeureDeFin(String heureDeFin) {
 		this.heureDeFin = heureDeFin;
 	}
 	public Arrets getArret() {
@@ -76,9 +78,15 @@ public class Horraires implements Serializable {
 	public void setLigne(LigneBus ligne) {
 		Ligne = ligne;
 	}
-
-	
-	
+	@Override
+	public LocalTime convertToDatabaseColumn(String arg0) {
+		return (arg0 == null ? null : LocalTime.parse(arg0,DateTimeFormatter.ISO_LOCAL_TIME));
+	}
+	@Override
+	public String convertToEntityAttribute(LocalTime arg0) {
+		return (arg0 == null ? null :arg0.toString());
+	}
+		
    
 }
 

@@ -17,6 +17,18 @@ Route::get('/about', 'PagesController@about');
 
 Route::get('/services', 'PagesController@services');
 
+Route::get('/webservices/afficherarrets', 'WebServiceController@afficherarrets');
+
+Route::get('/webservices/afficherarretsligne/{idligne}', 'WebServiceController@afficherarretsligne');
+
+Route::get('/webservices/afficherlignes', 'WebServiceController@afficherlignes');
+
+Route::get('/webservices/horrairesarret/{idarret}', 'WebServiceController@horrairesarret');
+
+Route::get('/webservices/horrairesarretligne/{idarret}/{idligne}', 'WebServiceController@horrairesarretligne');
+
+Route::get('/webservices/arret/{idligne}', 'WebServiceController@afficherarrets');
+
 Route::resource('posts', 'PostsController');
 
 Route::resource('webservices', 'WebServiceController');

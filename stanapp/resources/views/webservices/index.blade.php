@@ -7,7 +7,7 @@
         <?php $i = 0; ?>
         @foreach ($fonctions as $fonction)
             <div class="well">
-            <li class="list-group-item"><a href="/webservices/{{$i}}">{{$fonction}}</a></li>
+            <li class="list-group-item">{{$fonction}}</a></li>
             <?php $i++; ?>
             </div>
         @endforeach

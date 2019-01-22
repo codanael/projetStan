@@ -1,6 +1,9 @@
 <?php
 
+
 namespace App\Http\Controllers;
+
+ini_set("soap.wsdl_cache_enabled", "0");
 
 use Illuminate\Http\Request;
 use App\lignebus;
@@ -97,4 +100,47 @@ class WebServiceController extends Controller
     {
         //
     }
+
+    public function afficherarrets()
+    {
+        $clientSOAP = new SoapClient("http://localhost:8080/CoucheWebBusStan/WebServiceStan?wsdl");
+        $reponseSOAP = $clientSOAP->__soapCall('afficherListeArret',array());
+        return view('webservices.afficherarrets')->with('reponseSOAP',$reponseSOAP);
+    }
+
+    public function afficherarretsligne($idligne)
+    {
+        $clientSOAP = new SoapClient("http://localhost:8080/CoucheWebBusStan/WebServiceStan?wsdl");
+        $arg = array('idLigne' => $idligne);
+        $reponseSOAP = $clientSOAP->__soapCall('afficherArretsLigne',array($arg));
+        return view('webservices.afficherarretsligne')->with(['reponseSOAP' => $reponseSOAP,
+                                                                'idligne' => $idligne]);
+    }
+
+
+    public function afficherlignes()
+    {
+        $clientSOAP = new SoapClient("http://localhost:8080/CoucheWebBusStan/WebServiceStan?wsdl");
+        $reponseSOAP = $clientSOAP->__soapCall('afficherListeLigne',array());
+        return view('webservices.afficherlignes')->with('reponseSOAP',$reponseSOAP);
+    }
+    public function horrairesarret($idarret)
+    {
+        $clientSOAP = new SoapClient("http://localhost:8080/CoucheWebBusStan/WebServiceStan?wsdl");
+        $arg = array('idArret' => $idarret);
+        $reponseSOAP = $clientSOAP->__soapCall('afficherHorrairesArret',array($arg));
+        return view('webservices.horrairesarret')->with('reponseSOAP',$reponseSOAP);
+    }
+
+    public function horrairesarretligne($idarret,$idligne)
+    {
+        $clientSOAP = new SoapClient("http://localhost:8080/CoucheWebBusStan/WebServiceStan?wsdl");
+        $arg = array(
+            'idArret' => $idarret,
+            'idLigne' => $idligne
+        );
+        $reponseSOAP = $clientSOAP->__soapCall('afficherTableauHorraires',array($arg));
+        return view('webservices.horrairesarretligne')->with('reponseSOAP',$reponseSOAP);
+    }
+
 }

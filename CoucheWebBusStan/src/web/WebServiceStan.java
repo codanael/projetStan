@@ -1,6 +1,6 @@
 package web;
 
-import java.sql.Time;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -19,6 +19,8 @@ import metier.lignes.LignesLocal;
 
 @WebService(targetNamespace = "http://stanutilisateur.me")
 public class WebServiceStan {
+	
+	DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ISO_LOCAL_TIME;
 
 	@EJB
 	private ArretsLocal metierArrets;
@@ -53,6 +55,11 @@ public class WebServiceStan {
 	public List<Horraires> getHorrairesArret(@WebParam(name="idArret")int idArret){
 		return metierHorraires.getHorrairesArret(idArret);
 	}
+	
+	@WebMethod(operationName="afficherArretsLigne")
+	public List<Arrets> getArretsLigne(@WebParam(name="idLigne")int idLigne){
+		return metierArrets.getArretsLigne(idLigne);
+	}
 
 	//**SERVICES LIGNES**//
 
@@ -80,12 +87,17 @@ public class WebServiceStan {
 
 	@WebMethod(operationName="ajouterHorraire")
 	public Horraires addHorraire(@WebParam(name="heureDeDebut")String heureDeDebutS, @WebParam(name="frequence") int frequence, @WebParam(name="heureDeFin")String heureDeFinS, @WebParam(name="idArret")int idArret, @WebParam(name="idLigne")int idLigne) {
-		return metierHorraires.addHorraire(Time.valueOf(heureDeDebutS), frequence, Time.valueOf(heureDeFinS), idArret, idLigne);
+		return metierHorraires.addHorraire(heureDeDebutS, frequence, heureDeFinS, idArret, idLigne);
 	}
 
 	@WebMethod(operationName="afficherListeHorraires")
 	public List<Horraires> getListHorraires(){
 		return metierHorraires.getListHorraires();
+	}
+	
+	@WebMethod(operationName="afficherTableauHorraires")
+	public List<String> getTableauHorraires(@WebParam(name="idLigne")int idLigne,@WebParam(name="idArret") int idArret){
+		return metierHorraires.getTableauHorraires(idArret, idLigne);
 	}
 
 	//**SERVICES BUS**//
