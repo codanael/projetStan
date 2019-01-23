@@ -1,7 +1,15 @@
 @extends('layout.app')
 
 @section('content')
-    <h1>Horraires arret</h1>
+    <h1> @if ($nomArret->return != null)
+        Horaires à l'arret {{$nomArret->return->nom}}
+        
+    @endif
+    @if ($nomLigne->return != null)
+        de la ligne {{$nomLigne->return->numero}}
+        
+    @endif
+</h1>
     {{-- {{var_dump($reponseSOAP->return[1] )}} --}}
 
    @if ($reponseSOAP->return != null)

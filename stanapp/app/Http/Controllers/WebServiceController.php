@@ -110,11 +110,16 @@ class WebServiceController extends Controller
 
     public function afficherarretsligne($idligne)
     {
+
         $clientSOAP = new SoapClient("http://localhost:8080/CoucheWebBusStan/WebServiceStan?wsdl");
         $arg = array('idLigne' => $idligne);
+        $arg1 = array('id' => $idligne);
         $reponseSOAP = $clientSOAP->__soapCall('afficherArretsLigne',array($arg));
-        return view('webservices.afficherarretsligne')->with(['reponseSOAP' => $reponseSOAP,
-                                                                'idligne' => $idligne]);
+        $SOAPnomLigne = $clientSOAP->__soapCall('afficherLigne',array($arg1));
+        return view('webservices.afficherarretsligne')->with(
+            ['reponseSOAP' => $reponseSOAP,
+            'idligne' => $idligne,
+            'nomligne' => $SOAPnomLigne]);
     }
 
 
@@ -135,12 +140,23 @@ class WebServiceController extends Controller
     public function horrairesarretligne($idarret,$idligne)
     {
         $clientSOAP = new SoapClient("http://localhost:8080/CoucheWebBusStan/WebServiceStan?wsdl");
-        $arg = array(
+        $arg0 = array(
             'idArret' => $idarret,
             'idLigne' => $idligne
         );
-        $reponseSOAP = $clientSOAP->__soapCall('afficherTableauHorraires',array($arg));
-        return view('webservices.horrairesarretligne')->with('reponseSOAP',$reponseSOAP);
+        $arg1 = array(
+            'id' => $idarret,
+        );
+        $arg2 = array(
+            'id' => $idligne
+        );
+        $reponseSOAP = $clientSOAP->__soapCall('afficherTableauHorraires',array($arg0));
+        $SOAPnomArret = $clientSOAP->__soapCall('afficherArret',array($arg1));
+        $SOAPnomLigne = $clientSOAP->__soapCall('afficherLigne',array($arg2));
+        return view('webservices.horrairesarretligne')->with(
+            ['reponseSOAP'=> $reponseSOAP,
+            'nomArret' => $SOAPnomArret,
+            'nomLigne' => $SOAPnomLigne]);
     }
 
 }

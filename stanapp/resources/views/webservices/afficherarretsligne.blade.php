@@ -1,10 +1,13 @@
 @extends('layout.app')
 
 @section('content')
-    <h1>Arrets</h1>
-    {{-- {{var_dump($reponseSOAP )}} --}}
+    <h1>@if ($nomligne->return != null)
+        Arrets de la ligne {{$nomligne->return->numero}}
+        
+    @endif</h1>
+    {{-- {{var_dump($reponseSOAP->return )}} --}}
 
-    @if ($reponseSOAP->return != null)
+     @if (isset($reponseSOAP->return)) 
     @if(is_array($reponseSOAP->return)) 
         <ul class="list-group">
             @foreach ($reponseSOAP->return as $reponse)
@@ -18,9 +21,9 @@
         <div class="well">
             <li class="list-group-item"><a href="/webservices/horrairesarretligne/{{$reponseSOAP->return->id}}/{{$idligne}}">{{$reponseSOAP->return->nom}}</a></li>
             </div>
-        @else
-            <p>No horraire found</p>
         @endif
     @endif
+    @else
+            <p>No Arret found</p>
 @endif 
 @endsection
