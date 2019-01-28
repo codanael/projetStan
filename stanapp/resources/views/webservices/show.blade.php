@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layouts.app')
 
 @section('content')
     <a href="/webservices" class="btn btn-primary">Go back</a>

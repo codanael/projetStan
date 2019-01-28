@@ -29,6 +29,22 @@ Route::get('/webservices/horrairesarretligne/{idarret}/{idligne}', 'WebServiceCo
 
 Route::get('/webservices/arret/{idligne}', 'WebServiceController@afficherarrets');
 
+Route::get('/webservices/ajouterarretform', 'AdminController@ajouterarretform')
+    ->middleware('is_admin')    
+    ->name('admin');
+
+Route::post('/webservices/ajouterarret', 'AdminController@ajouterarret')
+    ->middleware('is_admin')    
+    ->name('admin');
+
 Route::resource('posts', 'PostsController');
 
 Route::resource('webservices', 'WebServiceController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/admin', 'AdminController@admin')    
+    ->middleware('is_admin')    
+    ->name('admin');

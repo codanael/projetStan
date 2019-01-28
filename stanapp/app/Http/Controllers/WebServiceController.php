@@ -159,4 +159,22 @@ class WebServiceController extends Controller
             'nomLigne' => $SOAPnomLigne]);
     }
 
+    public function ajouterarretform()
+    {
+        return view('webservices.ajouterarretform');
+    }
+
+    public function ajouterarret(Request $request)
+    {
+        $this->validate($request, [
+            'nom' => 'required'
+        ]);
+        $clientSOAP = new SoapClient("http://localhost:8080/CoucheWebBusStan/WebServiceStan?wsdl");
+        $arg0 = array(
+            'nom' => $request->nom
+        );
+        $reponseSOAP = $clientSOAP->__soapCall('ajouterArret',array($arg0));
+
+        return redirect('webservices/afficherarrets')->with('success', 'Arret créé');
+    }
 }
